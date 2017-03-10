@@ -25,7 +25,21 @@ input {
 <script src="../_js/jquery.min.js"></script>
 <script>
 $(document).ready(function() {
-			
+	$("#login").submit(function(){
+		var formData = $("#login").serialize();
+		console.log(formData);
+		$.get("login.php", formData, processData);
+		function processData(data){
+			if (data == "pass"){
+				$(".main").html("<p>Вы авторизованы!</p>");
+			} else {
+				if ($('#fail').length === 0){
+					$("#formwrapper").prepend("<p id='fail'>Некорректная информация. Авторизация не пройдена!</p>");
+				}//end if
+			}//end if
+		}//end processData
+		return false;
+	});//end submit
 }); // end ready
 </script>
 </head>
