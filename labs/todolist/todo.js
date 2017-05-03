@@ -28,6 +28,9 @@ $(document).ready(function(e) {
 			"Cancel" : function(){
 				$(this).dialog("close");
 			}
+		},
+		close: function (){
+			$("#new-todo input").val("");
 		}
 	});
 }); // end ready
