@@ -4,4 +4,5 @@ $(document).ready(function(e) {
 			primary:"ui-icon-circle-plus"
 		}
 	});
+	$("#new-todo").dialog();
 }); // end ready
