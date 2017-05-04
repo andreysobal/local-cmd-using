@@ -13,12 +13,13 @@ $(document).ready(function(e) {
 		autoOpen:false,
 		buttons:{
 			"Add" : function(){
-				var taskName = $("#task").val();
+				var taskName = $("#newtask").val();
 				if (taskName === "") {
 					return false;
 				}
 				var taskHTML = '<li><span class="done">%</span>';
 				taskHTML += '<span class="delete">x</span>';
+				taskHTML += '<span class="fix">e</span>';
 				taskHTML += '<span class="task"></span></li>';
 				var $newTask = $(taskHTML);
 				$newTask.find('.task').text(taskName);
@@ -33,6 +34,43 @@ $(document).ready(function(e) {
 		},
 		close: function (){
 			$("#new-todo input").val("");
+		}
+	});
+	
+	$("#todo-list").on('click', '.fix', function(){
+		var $taskItem = $(this).parent("li");
+		$taskItem.addClass("fixing");
+		$("#fix-todo").dialog("open");
+	});
+	
+	$("#fix-todo").dialog({
+		modal:true,
+		autoOpen:false,
+		open:function (){
+			var addText = $(".fixing .task").text();
+			$("#fix-todo input").val(addText);
+		},
+		buttons:{
+			"Correct" : function(){
+				var taskName = $("#fixtask").val();
+				if (taskName === "") {
+					return false;
+				}
+				var $newTask = $(".fixing");
+				$newTask.find('.task').text(taskName);
+				$newTask.hide();
+				$("#todo-list").prepend($newTask);
+				$newTask.show('clip', 250).effect('highlight', 1000);
+				$(this).dialog("close");
+				$newTask.removeClass("fixing");
+			},
+			"Cancel" : function(){
+				$(this).dialog("close");
+				$(".fixing").removeClass("fixing");
+			}
+		},
+		close: function (){
+			$("#fix-todo input").val("");
 		}
 	});
 	
