@@ -38,6 +38,8 @@ $(document).ready(function(e) {
 		$taskItem.slideUp(250, function(){
 			var $this = $(this);
 			$this.detach();
+			$("#completed-list").prepend($this);
+			$this.slideDown();
 		});
 	});
 }); // end ready
