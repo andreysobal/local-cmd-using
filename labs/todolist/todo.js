@@ -33,4 +33,11 @@ $(document).ready(function(e) {
 			$("#new-todo input").val("");
 		}
 	});
+	$("#todo-list").on('click', '.done', function(){
+		var $taskItem = $(this).parent("li");
+		$taskItem.slideUp(250, function(){
+			var $this = $(this);
+			$this.detach();
+		});
+	});
 }); // end ready
