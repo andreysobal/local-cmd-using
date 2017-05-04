@@ -1,4 +1,5 @@
 $(document).ready(function(e) {
+	
 	$("#add-todo").button({
 		icons:{
 			primary:"ui-icon-circle-plus"
@@ -6,6 +7,7 @@ $(document).ready(function(e) {
 	}).click(function(){
 		$("#new-todo").dialog("open");
 	});
+	
 	$("#new-todo").dialog({
 		modal:true,
 		autoOpen:false,
@@ -33,6 +35,7 @@ $(document).ready(function(e) {
 			$("#new-todo input").val("");
 		}
 	});
+	
 	$("#todo-list").on('click', '.done', function(){
 		var $taskItem = $(this).parent("li");
 		$taskItem.slideUp(250, function(){
@@ -42,4 +45,12 @@ $(document).ready(function(e) {
 			$this.slideDown();
 		});
 	});
+	
+	$(".sortlist").sortable({
+		connectWith:'.sortlist',
+		cursor: 'pointer',
+		placeholder: 'ui-state-highlight',
+		cancel: '.delete, .done'
+	});
+	
 }); // end ready
