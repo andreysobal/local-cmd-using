@@ -53,4 +53,9 @@ $(document).ready(function(e) {
 		cancel: '.delete, .done'
 	});
 	
+	$(".sortlist").on('click', '.delete', function(){
+		$(this).parent("li").effect('puff', function(){
+			$(this).remove();
+		});
+	});
 }); // end ready
