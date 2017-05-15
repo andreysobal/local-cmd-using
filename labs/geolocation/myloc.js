@@ -1,4 +1,4 @@
-window.init = getMyLocation;
+window.onload = getMyLocation;
 
 function getMyLocation () {
 	if (navigator.geolocation){
@@ -10,7 +10,7 @@ function getMyLocation () {
 	function displayLocation(position) {
 		var latitude = position.coords.latitude;
 		var longitude = position.coords.longitude;
-		var div = getElementById("location");
-		div.innerHTML = "You are at latitude: " + latitude + ", Longitude: " + longitude;
+		var div = document.getElementById("location");
+		div.innerHTML = "You are at latitude: " + latitude + ", longitude: " + longitude;
 	}
 };
