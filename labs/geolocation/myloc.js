@@ -12,6 +12,10 @@ function getMyLocation () {
 		var longitude = position.coords.longitude;
 		var div = document.getElementById("location");
 		div.innerHTML = "You are at latitude: " + latitude + ", longitude: " + longitude;
+		
+		var km = computeDistance(position.coords, ourCoords);
+		var distance = div = document.getElementById("distance");
+		div.innerHTML = "You are " + km + " km from the WickedlySmart HQ";
 	}
 	
 	function displayError (error){
@@ -28,5 +32,27 @@ function getMyLocation () {
 		};
 		var div = document.getElementById("location");
 		div.innerHTML = errorMessage;
+	}
+	
+	function computeDistance (startCoords, destCoords) {
+		var startLatRads = degreesToRadians (startCoords.latitude);
+		var startLongRads = degreesToRadians (startCoords.longitude);
+		var destLatRads = degreesToRadians (destCoords.latitude);
+		var destLongRads = degreesToRadians (destCoords.longitude);
+		
+		var Radius = 6371;//radius of Earth in km
+		var distance = Math.acos(Math.sin(startLatRads) * Math.sin(destLatRads) + Math.cos(startLatRads) * Math.cos(destLatRads) * Math.cos(startLongRads - destLongRads)) * Radius;
+		
+		return distance;
+	}
+	
+	function degreesToRadians(degrees){
+		var radians = (degrees * Math.PI)/180;
+		return radians;
+	}
+	
+	var ourCoords = {
+		latitude:47.624851,
+		longitude: -122.52099
 	}
 };
