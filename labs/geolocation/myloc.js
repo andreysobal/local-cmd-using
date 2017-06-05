@@ -10,12 +10,15 @@ function getMyLocation () {
 	function displayLocation(position) {
 		var latitude = position.coords.latitude;
 		var longitude = position.coords.longitude;
+		
 		var div = document.getElementById("location");
 		div.innerHTML = "You are at latitude: " + latitude + ", longitude: " + longitude;
 		
 		var km = computeDistance(position.coords, ourCoords);
-		var distance = div = document.getElementById("distance");
-		div.innerHTML = "You are " + km + " km from the WickedlySmart HQ";
+		var distance = document.getElementById("distance");
+		distance.innerHTML = "You are " + km + " km from the WickedlySmart HQ";
+		
+		showMap(position.coords);
 	}
 	
 	function displayError (error){
@@ -54,5 +57,20 @@ function getMyLocation () {
 	var ourCoords = {
 		latitude:47.624851,
 		longitude: -122.52099
+	}
+	
+	//for map
+	
+	var map;
+	
+	function showMap (coords){
+		var googleLatAndLong = new google.maps.LatLng (coords.latitude, coords.longitude);
+		var mapOptions = {
+			zoom:10,
+			center: googleLatAndLong,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		};
+		var mapDiv = document.getElementById("map");
+		map = new google.maps.Map(mapDiv, mapOptions);
 	}
 };
